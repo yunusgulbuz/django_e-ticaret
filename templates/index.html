@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ settings.title }}
+{% endblock %}
+
+{% block keywords %}
+    {{ settings.keywords }}
+{% endblock %}
+
+{% block description %}
+    {{ settings.description}}
+{% endblock %}
+
+{% block head %}
+<link rel="shorcut icon" type="image/x-icon" href="{{ settings.icon.url }}">
+{% endblock %}
+
+
