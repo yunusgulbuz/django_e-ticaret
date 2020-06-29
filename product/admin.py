@@ -28,6 +28,7 @@ class CategoryProduct(admin.ModelAdmin):
         'title',
         'status',
         'image_tag',
+        'create_at',
     ]
     list_display_links = [
         'title',

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.safestring import mark_safe
-
 STATUS = (
     ('True', 'Evet'),
     ('False', 'Hayır'),
@@ -27,6 +26,7 @@ class Category(models.Model):
         else:
             return ""
 
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
@@ -44,10 +44,16 @@ class Product(models.Model):
         return self.title
 
     def image_tag(self):
-        if self.image:
-            return mark_safe(f'<img src="{self.image.url}" height="50"/>')
-        else:
-            return ""
+        imageList = dict()
+        imageList['images'] = ""
+        for image in Images.objects.filter(product=self.pk):
+            if imageList['images'] != "":
+                imageList['images'] = mark_safe(f"{imageList['images']}<img src='{image.image.url}' height='40'/>"
+                                                f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;")
+            else:
+                imageList['images'] = mark_safe(f"<img src='{image.image.url}' height='40'/>"
+                                                f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;")
+        return imageList['images']
 
 
 class Images(models.Model):
